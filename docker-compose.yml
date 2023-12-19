@@ -6,7 +6,7 @@ services:
     depends_on:
       - db
     expose:
-      - "80"
+      - "8080"
     deploy:
       resources:
         limits:
@@ -19,7 +19,7 @@ services:
     depends_on:
       - db
     expose:
-      - "80"
+      - "8080"
     deploy:
       resources:
         limits:
@@ -48,4 +48,7 @@ services:
         limits:
           cpus: '0.75'
           memory: '1.5GB'
+    environment:
+      POSTGRES_DB: "db"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
     # ...

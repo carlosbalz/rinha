@@ -9,6 +9,10 @@ import java.util.List;
 @RestController
 public class PessoaController {
 
+    @GetMapping(value="/")
+    public String hello(){
+        return "Hello World!!";
+    }
 
     @PostMapping("/pessoas")
     public void create(@RequestBody Pessoa pessoa) {
