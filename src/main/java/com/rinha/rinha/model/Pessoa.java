@@ -1,13 +1,28 @@
 package com.rinha.rinha.model;
 
+import jakarta.persistence.*;
+
+import java.util.UUID;
+
+@Entity
+@Table(name = "pessoa", schema = "public")
 public class Pessoa {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
+    private UUID id;
+
+    @Column(name = "apelido", nullable = false, length = 32, unique = true)
     private String apelido;
 
+    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
+    @Column(name = "nascimento", nullable = false, length = 10)
     private String nascimento;
 
+    @Column(name = "stack", columnDefinition = "text")
     private String[] stack;
 
     public String getApelido() {

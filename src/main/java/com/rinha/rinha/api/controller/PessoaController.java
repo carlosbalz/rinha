@@ -1,10 +1,12 @@
 package com.rinha.rinha.api.controller;
 
+import com.rinha.rinha.api.repository.PessoaRepository;
 import com.rinha.rinha.api.service.PessoaService;
 import com.rinha.rinha.api.service.PessoaServiceImpl;
 import com.rinha.rinha.model.Pessoa;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,7 +17,8 @@ public class PessoaController {
 
     private static final Logger logger = LoggerFactory.getLogger(PessoaController.class);
 
-    private static final PessoaService service = new PessoaServiceImpl();
+    @Autowired
+    PessoaRepository repository;
 
     @GetMapping(value="/")
     public String hello(){
@@ -25,7 +28,7 @@ public class PessoaController {
     @PostMapping("/pessoas")
     public void create(@RequestBody Pessoa pessoa) {
         logger.error("NOME: {}", pessoa.getNome());
-        service.createPessoa(pessoa);
+        repository.save(pessoa);
     }
 
     @GetMapping("/pessoas/{id}")
@@ -39,7 +42,7 @@ public class PessoaController {
     }
 
     @GetMapping("/contagem-pessoas")
-    public int countPessoas() {
-        return service.countPessoas();
+    public long countPessoas() {
+        return repository.count();
     }
 }
