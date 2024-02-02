@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/pessoas")
 public class PessoaController {
 
     private static final Logger logger = LoggerFactory.getLogger(PessoaController.class);
@@ -19,22 +20,22 @@ public class PessoaController {
     @Autowired
     PessoaService service;
 
-    @PostMapping("/pessoas")
+    @PostMapping("/")
     public void create(@RequestBody Pessoa pessoa) {
         logger.error("NOME: {}", pessoa.getNome());
         service.create(pessoa);
     }
 
-    @GetMapping("/pessoas/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Pessoa> findById(@PathVariable UUID id) throws Exception {
         Pessoa pessoa = service.findById(id);
         logger.error("NOME: {}", pessoa.getNome());
         return ResponseEntity.ok(pessoa);
     }
 
-    @GetMapping("/pessoas")
-    public List<Pessoa> findByTermo(@RequestParam String termo) {
-        return service.findByTermo(termo);
+    @GetMapping("")
+    public ResponseEntity<List<Pessoa>> findByTermo(@RequestParam("t") String t) {
+        return ResponseEntity.ok(service.findByTermo(t));
     }
 
     @GetMapping("/contagem-pessoas")

@@ -26,7 +26,7 @@ public class PessoaServiceImpl implements PessoaService {
     }
 
     public List<Pessoa> findByTermo(String termo) {
-        return new ArrayList<>();
+        return repository.findByTermo(termo);
     }
 
     public long count() {
