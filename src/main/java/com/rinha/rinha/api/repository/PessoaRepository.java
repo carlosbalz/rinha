@@ -10,8 +10,8 @@ import java.util.UUID;
 
 @Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, UUID> {
-
-    @Query(value = "SELECT * FROM PESSOA WHERE APELIDO ~* ?1 OR NOME ~* ?1 OR ARRAY_TO_STRING(STACK, ',') ~* ?1 LIMIT 50", nativeQuery = true)
+    @Query(value= "SELECT * FROM PESSOA WHERE TERMO ~* ?1 LIMIT 50", nativeQuery = true)
     List<Pessoa> findByTermo(String termo);
 
+    List<Pessoa> findByApelido(String apelido);
 }

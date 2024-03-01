@@ -5,24 +5,22 @@ import com.rinha.rinha.model.Pessoa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class PessoaServiceImpl implements PessoaService {
-
     @Autowired
     PessoaRepository repository;
 
-    public void create(Pessoa pessoa) {
-        repository.save(pessoa);
+    public Pessoa create(Pessoa pessoa) {
+        return repository.save(pessoa);
     }
 
     public Pessoa findById(UUID id) throws Exception {
-        Optional<Pessoa> result = Optional.of(repository.getReferenceById(id));
-        return result.orElseThrow(() -> new Exception("Não foi possível encontrar uma pessoa com o id: " + id));
+        Optional<Pessoa> pessoa = Optional.of(repository.getReferenceById(id));
+        return pessoa.orElseThrow(() -> new Exception("Não foi possível encontrar uma pessoa com o id: " + id));
     }
 
     public List<Pessoa> findByTermo(String termo) {
@@ -31,6 +29,11 @@ public class PessoaServiceImpl implements PessoaService {
 
     public long count() {
         return repository.count();
+    }
+
+    public boolean apelidoExists(String apelido) {
+        List<Pessoa> pessoas = repository.findByApelido(apelido);
+        return pessoas != null && !pessoas.isEmpty();
     }
 
 }

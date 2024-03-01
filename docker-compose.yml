@@ -11,8 +11,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.25'
-          memory: '0.5GB'
+          cpus: '2'
+          memory: '3GB'
+#          cpus: '0.25'
+#          memory: '0.5GB'
     networks:
       - api_network
 
@@ -27,8 +29,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.25'
-          memory: '0.5GB'
+          cpus: '2'
+          memory: '3GB'
+#          cpus: '0.25'
+#          memory: '0.5GB'
     networks:
       - api_network
 
@@ -45,8 +49,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.25'
-          memory: '0.5GB'
+          cpus: '2'
+          memory: '3GB'
+#          cpus: '0.25'
+#          memory: '0.5GB'
     networks:
       - api_network
 
@@ -58,8 +64,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.75'
-          memory: '1.5GB'
+          cpus: '3'
+          memory: '3GB'
     environment:
         POSTGRES_DB: rinha
         POSTGRES_USER: cbalz
@@ -68,6 +74,18 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - api_network
+
+  redis: #cache
+    image: redis:6.2-alpine
+    ports:
+      - '6379:6379'
+    networks:
+      - api_network
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: '1GB'
 
 networks:
   api_network:
