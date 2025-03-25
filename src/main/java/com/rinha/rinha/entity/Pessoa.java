@@ -1,4 +1,4 @@
-package com.rinha.rinha.model;
+package com.rinha.rinha.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -15,7 +15,7 @@ import java.util.UUID;
 public class Pessoa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    //@GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private UUID id;
 
@@ -36,6 +36,9 @@ public class Pessoa {
 
     }
 
+    public void setId(UUID uuid) {
+        this.id = uuid;
+    }
     public UUID getId() {
         return id;
     }

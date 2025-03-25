@@ -6,3 +6,7 @@ CREATE TABLE IF NOT EXISTS pessoa (
     stack       TEXT[],
     termo       character varying(500) GENERATED ALWAYS AS (apelido || ' ' || nome || ' ' || nascimento) STORED
 );
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+
+CREATE INDEX ON pessoa USING gist(termo gist_trgm_ops);
